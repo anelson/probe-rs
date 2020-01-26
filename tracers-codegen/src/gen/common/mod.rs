@@ -161,7 +161,8 @@ pub(super) trait ProbeGeneratorBase {
     /// Generates a doc comment to attach to the probe's method.  This includes additional information
     /// about how to work with this probe on various platforms.
     fn generate_probe_doc_comment(&self, provider: &ProviderSpecification) -> TokenStream {
-        let probe_comment = format!(r###"
+        let probe_comment = format!(
+            r###"
 # Probing
 
 This method is translated at compile-time by `tracers` into a platform-specific tracing
@@ -195,10 +196,10 @@ where `${{PID}}` should be the actual process ID of the process you are tracing.
 TODO: No other platforms supported yet
 
 "###,
-        trait_name = &provider.item_trait().ident,
-        probe_name = &self.spec().name,
-        provider = provider.name(),
-);
+            trait_name = &provider.item_trait().ident,
+            probe_name = &self.spec().name,
+            provider = provider.name(),
+        );
 
         generate_multiline_comments(&probe_comment)
     }
