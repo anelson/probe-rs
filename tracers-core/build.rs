@@ -82,7 +82,8 @@ fn generate_probe_args_impl(type_params: &Vec<String>) -> String {
     "#,
         type_list = type_params.join(","),
         tuple_type = make_tuple_type(&type_params),
-        args_where_clause = xform_types(&type_params, |x| format!("{t}: ProbeArgType<{t}>", t=x)).join(","),
+        args_where_clause =
+            xform_types(&type_params, |x| format!("{t}: ProbeArgType<{t}>", t = x)).join(","),
         arg_count = type_params.len(),
         ctypes = xform_types(&type_params, |x| format!("get_ctype::<{}>()", x)).join(","),
         probe_args = probe_args.join(",")
